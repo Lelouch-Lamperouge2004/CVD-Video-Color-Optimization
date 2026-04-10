@@ -1,0 +1,11 @@
+torch
+torchvision
+torchaudio
+opencv-python
+numpy
+pillow
+tqdm
+streamlit
+scikit-image
+scipy
+pandas
