@@ -3,6 +3,5 @@ dataset/
 outputs/
 logs/
 inputs/
-checkpoints/
 *.pth
 __pycache__/
