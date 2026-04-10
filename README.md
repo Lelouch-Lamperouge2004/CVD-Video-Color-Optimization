@@ -390,6 +390,6 @@ If it prints `False`, reinstall PyTorch using the correct GPU command from the o
 ---
 
 # Author
-Aditya Dnyandeo Ingale
-Final Year CSE Project  
+Aditya Dnyandeo Ingale , 
+Final Year CSE Project ,
 Video Color Optimization for Color Blind People
