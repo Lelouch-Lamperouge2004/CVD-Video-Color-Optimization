@@ -2,6 +2,7 @@ import os
 import numpy as np
 from PIL import Image, ImageDraw, ImageFont
 import random
+import csv
 
 OUTPUT_DIR = r"D:\CVD_GAN\app\plates"
 os.makedirs(OUTPUT_DIR, exist_ok=True)
@@ -71,16 +72,30 @@ def generate_plate(number_text, axis_type, filename):
 
 
 def main():
-    red_green_numbers = ["12", "8", "6", "57", "45", "73"]
-    blue_yellow_numbers = ["29", "5", "3", "64", "91", "27"]
+    red_green_numbers = [str(random.randint(10, 99)) for _ in range(6)]
+    blue_yellow_numbers = [str(random.randint(10, 99)) for _ in range(6)]
+
+    config_rows = []
 
     for i, num in enumerate(red_green_numbers):
-        generate_plate(num, "red-green", f"plate_rg_{i+1}.png")
+        filename = f"plate_rg_{i+1}.png"
+        generate_plate(num, "red-green", filename)
+        config_rows.append([filename, num, "rg"])
 
     for i, num in enumerate(blue_yellow_numbers):
-        generate_plate(num, "blue-yellow", f"plate_by_{i+1}.png")
+        filename = f"plate_by_{i+1}.png"
+        generate_plate(num, "blue-yellow", filename)
+        config_rows.append([filename, num, "by"])
+
+    config_path = os.path.join(OUTPUT_DIR, "plates_config.csv")
+
+    with open(config_path, "w", newline="", encoding="utf-8") as f:
+        writer = csv.writer(f)
+        writer.writerow(["file", "correct", "axis"])
+        writer.writerows(config_rows)
 
     print("12 synthetic plates generated in:", OUTPUT_DIR)
+    print("Plate config generated at:", config_path)
 
 
 if __name__ == "__main__":
