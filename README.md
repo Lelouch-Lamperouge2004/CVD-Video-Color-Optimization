@@ -1,20 +1,228 @@
-# Video Color Optimization for Color Blind People
+# Video Color Optimization for Color Blind People using Conditional GAN
 
-A local Streamlit application for enhancing uploaded videos for users with color vision deficiency using a conditional GAN.
+A deep learning-based video enhancement system that improves color distinguishability for people with Color Vision Deficiency (CVD) using a Conditional GAN (cGAN). The application provides a lightweight screening test, suggests an enhancement mode, processes uploaded videos frame-by-frame, and generates an optimized output video while preserving visual realism.
 
-The project supports three deficiency types:
+---
 
-- Protan
-- Deutan
-- Tritan
+## Features
 
-The application flow is:
+### Color Vision Deficiency Support
 
-1. User takes a lightweight screening test
-2. User selects or confirms the deficiency type
-3. User uploads a video
-4. The model enhances the video
-5. User downloads the processed result
+The system supports three major color vision deficiency types:
+
+* Protan (Red deficiency)
+* Deutan (Green deficiency)
+* Tritan (Blue-Yellow deficiency)
+
+---
+
+### Dynamic Screening Test
+
+* Synthetic Ishihara-style screening plates
+* Red-Green and Blue-Yellow axis evaluation
+* Automatic enhancement type suggestion
+* One-click generation of new randomized screening tests
+* CSV-based answer synchronization
+
+---
+
+### Video Enhancement Pipeline
+
+* Upload MP4 videos
+* Frame-by-frame enhancement using Conditional GAN
+* Temporal smoothing to reduce flickering
+* LAB color-space enhancement
+* Adjustable enhancement strength
+* Adjustable sharpening controls
+
+---
+
+### Result Visualization
+
+* Side-by-side video comparison
+* Original vs Enhanced preview
+* Frame-level comparison
+
+  * Beginning frame
+  * Middle frame
+  * Ending frame
+* Download enhanced video
+
+---
+
+## System Architecture
+
+```text
+Screening Test
+      ↓
+Deficiency Estimation
+      ↓
+Type Selection
+      ↓
+Video Upload
+      ↓
+Conditional GAN
+      ↓
+Frame Enhancement
+      ↓
+Video Reconstruction
+      ↓
+Result Comparison
+      ↓
+Download Output
+```
+
+---
+
+## Project Workflow
+
+### Step 1 – Screening Test
+
+The user answers synthetic Ishihara-style plates.
+
+### Step 2 – Deficiency Estimation
+
+The application analyzes mistakes on:
+
+* Red-Green plates
+* Blue-Yellow plates
+
+and suggests an enhancement type.
+
+### Step 3 – Type Selection
+
+The user may:
+
+* Accept the suggested type
+* Manually select Protan, Deutan, or Tritan
+
+### Step 4 – Video Upload
+
+The user uploads an MP4 video.
+
+### Step 5 – Video Processing
+
+Each frame is:
+
+* Extracted
+* Resized
+* Conditioned with the selected CVD type
+* Passed through the trained Conditional GAN
+
+### Step 6 – Enhancement
+
+Additional processing includes:
+
+* Temporal smoothing
+* LAB color enhancement
+* Edge sharpening
+
+### Step 7 – Result Generation
+
+Enhanced frames are reconstructed into a processed video.
+
+### Step 8 – Comparison
+
+The application displays:
+
+* Original vs Enhanced Video
+* Representative Frame Comparisons
+
+### Step 9 – Download
+
+The enhanced video can be downloaded locally.
+
+---
+
+# Technology Stack
+
+## Frontend
+
+### Streamlit
+
+Used for:
+
+* User Interface
+* Screening Test
+* Video Upload
+* Progress Tracking
+* Comparison Dashboard
+* Download Functionality
+
+---
+
+## Backend
+
+### Python
+
+Used for:
+
+* Application Logic
+* Video Processing
+* Inference Pipeline
+* File Management
+
+---
+
+## Deep Learning
+
+### PyTorch
+
+Used for:
+
+* Conditional GAN
+* U-Net Generator
+* PatchGAN Discriminator
+* GPU Acceleration
+* Checkpoint Loading
+
+---
+
+## Computer Vision
+
+### OpenCV
+
+Used for:
+
+* Video Reading
+* Frame Extraction
+* Frame Resizing
+* Video Writing
+
+---
+
+## Image Processing
+
+### Pillow (PIL)
+
+Used for:
+
+* Synthetic Plate Generation
+* Image Rendering
+* Plate Visualization
+
+---
+
+## Numerical Computing
+
+### NumPy
+
+Used for:
+
+* Matrix Operations
+* Pixel Processing
+* Image Masks
+
+---
+
+## Video Encoding
+
+### imageio-ffmpeg
+
+Used for:
+
+* Browser-compatible MP4 generation
+* Streamlit video playback support
 
 ---
 
@@ -24,372 +232,346 @@ The application flow is:
 CVD-Video-Color-Optimization/
 │
 ├── app/
+│   ├── app.py
+│   ├── generate_synthetic_plates.py
+│   └── plates/
+│
 ├── checkpoints/
+│
+├── dataset/
+│
 ├── inference/
+│   └── video_pipeline.py
+│
 ├── preprocessing/
+│
 ├── simulate/
+│
 ├── training/
+│
 ├── utils/
-├── .gitignore
+│
+├── outputs/
+│
 ├── README.md
+│
 └── requirements.txt
 ```
 
-Important folders:
+---
 
-- `app/` → Streamlit application
-- `checkpoints/` → pretrained model checkpoint goes here
-- `inference/` → video processing pipeline
-- `preprocessing/` → image resize utilities
-- `simulate/` → target generation and color-deficiency simulation
-- `training/` → model training scripts
-- `utils/` → helper functions
+# Folder Description
+
+## app/
+
+Contains:
+
+* Streamlit application
+* Screening test logic
+* User interface
+
+### Important Files
+
+#### app.py
+
+Main application entry point.
+
+#### generate_synthetic_plates.py
+
+Generates randomized screening plates and updates plate configuration.
 
 ---
 
-# System Requirements
+## checkpoints/
 
-## Minimum
-- Windows 10 or 11
-- Python 3.10
-- Git
-- 8 GB RAM
+Stores pretrained model checkpoints.
 
-## Recommended
-- NVIDIA GPU
-- Latest NVIDIA driver
-- Microsoft Visual C++ Redistributable (x64)
+Example:
 
-PyTorch’s official install page recommends installing the build that matches the user’s system from the official selector, and current stable Windows support is for Python 3.10 or later.
-
-Microsoft provides the current Visual C++ Redistributable downloads for Windows on its official page. 
----
-
-# Before You Start
-
-You need two things:
-
-1. The GitHub project code
-2. The pretrained checkpoint file from Kaggle
-
-The checkpoint file must be placed manually after downloading.
+```text
+checkpoints/
+└── enhance_gan_conditional/
+    └── latest.pth
+```
 
 ---
 
-# Step 1 - Clone the Repository
+## inference/
 
-Open PowerShell or Command Prompt and run:
+Contains the runtime video enhancement pipeline.
 
-```powershell
+### video_pipeline.py
+
+Responsible for:
+
+* Loading the trained model
+* Reading videos
+* Processing frames
+* Writing enhanced output
+
+---
+
+## preprocessing/
+
+Dataset preprocessing utilities.
+
+---
+
+## simulate/
+
+Generates enhancement targets used during training.
+
+---
+
+## training/
+
+Contains:
+
+* GAN architecture
+* Training pipeline
+* Loss functions
+
+---
+
+## utils/
+
+Shared helper functions and checkpoint utilities.
+
+---
+
+# Model Architecture
+
+## Generator
+
+U-Net Generator
+
+Advantages:
+
+* Skip Connections
+* Better Detail Preservation
+* Stable Image Reconstruction
+
+---
+
+## Discriminator
+
+PatchGAN Discriminator
+
+Advantages:
+
+* Better Texture Learning
+* Improved Local Feature Detection
+* Stable GAN Training
+
+---
+
+# Training Configuration
+
+| Parameter     | Value         |
+| ------------- | ------------- |
+| Dataset Size  | 15,000 Images |
+| Resolution    | 256×256       |
+| Epochs        | 40            |
+| Batch Size    | 6             |
+| Learning Rate | 0.0002        |
+| Optimizer     | Adam          |
+| Generator     | U-Net         |
+| Discriminator | PatchGAN      |
+
+---
+
+# Installation
+
+## Clone Repository
+
+```bash
 git clone https://github.com/Lelouch-Lamperouge2004/CVD-Video-Color-Optimization.git
+
 cd CVD-Video-Color-Optimization
 ```
 
-# Step 2 - Create a Virtual Environment
+---
 
-Create the virtual environment **inside the project folder**:
+## Create Virtual Environment
 
-```powershell
+```bash
 python -m venv .venv
 ```
 
-Activate it:
+Activate:
 
-```powershell
+```bash
 .\.venv\Scripts\activate
-```
-
-You should now see:
-
-```text
-(.venv)
 ```
 
 ---
 
-# Step 3 - Install Project Dependencies
+## Install Dependencies
 
-Install the Python packages from `requirements.txt`:
-
-```powershell
+```bash
 pip install -r requirements.txt
 ```
 
 ---
 
-# Step 4 - Install PyTorch Separately
+## Install PyTorch
 
-PyTorch should be installed separately from the rest of the requirements so users can choose the correct build for their system.
+### CUDA Version
 
-PyTorch provides official install commands for CPU and CUDA builds on its install page.
-
-## Option A - NVIDIA GPU users
-
-Open the official PyTorch installation page and select:
-
-- OS: Windows
-- Package: Pip
-- Language: Python
-- Compute Platform: CUDA
-
-Then run the command shown there.
-
-Example CUDA command:
-
-```powershell
-pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu118
+```bash
+pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu121
 ```
 
-## Option B - CPU-only users
+### CPU Version
 
-```powershell
+```bash
 pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cpu
 ```
 
 ---
 
-# Step 5 - Verify PyTorch Installation
+## Install FFmpeg Wrapper
 
-Run:
-
-```powershell
-python -c "import torch; print(torch.__version__); print(torch.cuda.is_available())"
+```bash
+pip install imageio-ffmpeg
 ```
-
-Expected:
-- It should print the installed PyTorch version
-- It should print `True` for GPU systems or `False` for CPU-only systems
 
 ---
 
-# Step 6 - Download the Pretrained Model from Kaggle
+# Download Pretrained Model
 
-Download the pretrained checkpoint file from the Kaggle dataset link provided in this repository.
+Download the checkpoint from:
 
 https://www.kaggle.com/datasets/lelouchlamperouge69/cvd-pretrained-cgan-model-for-vc-optimization
 
-After downloading, create this folder inside the project if it does not already exist:
+Place the file at:
 
 ```text
-checkpoints/enhance_gan_conditional/
+checkpoints/enhance_gan_conditional/latest.pth
 ```
-
-Place the model file here:
-
-```text
-checkpoints/enhance_gan_conditional/best.pth
-```
-
-Final expected path:
-
-```text
-CVD-Video-Color-Optimization/checkpoints/enhance_gan_conditional/latest.pth
-```
-Here both can be used latest.pth or best.pth but latest is recommended.
----
-
-# Step 7 - Edit `app.py` Checkpoint Path
-
-Open:
-
-```text
-app/app.py
-```
-
-Find the checkpoint path section.
-
-Use a **relative path** like this:
-
-```python
-from pathlib import Path
-
-ROOT_DIR = Path(__file__).resolve().parent.parent
-CKPT_PATH = ROOT_DIR / "checkpoints" / "enhance_gan_conditional" / "best.pth"
-PLATE_DIR = ROOT_DIR / "app" / "plates"
-OUTPUT_DIR = ROOT_DIR / "outputs" / "videos"
-OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
-```
-
-Do not use a personal absolute path like:
-
-```python
-CKPT_PATH = r"D:\CVD_GAN\checkpoints\enhance_gan_conditional\latest.pth"
-```
-
-because that will only work on your own machine.
 
 ---
 
-# Step 8 - Run the Application
+# Running the Application
 
-From the project root:
+Generate screening plates:
 
-```powershell
+```bash
+python app/generate_synthetic_plates.py
+```
+
+Run Streamlit:
+
+```bash
 streamlit run app/app.py
 ```
 
-After a few seconds, Streamlit will print a local URL such as:
+Open:
 
 ```text
 http://localhost:8501
 ```
 
-Open that URL in your browser.
-
 ---
 
-# Step 9 - Use the Application
+# Running Direct Inference
 
-Inside the app:
-
-1. Take the screening test
-2. Select or confirm the CVD type
-3. Upload an MP4 video
-4. Click **Process Video**
-5. Download the processed output
-
-Output videos are saved in:
-
-```text
-outputs/videos/
-```
-or can be directly downloaded.
----
-
-# Running the App on a Fresh Windows Machine - Full Command Order
-
-Use these commands in this order:
-
-```powershell
-git clone https://github.com/YOUR_USERNAME/CVD-Video-Color-Optimization.git
-cd CVD-Video-Color-Optimization
-python -m venv .venv
-.\.venv\Scripts\activate
-pip install -r requirements.txt
-pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu118
-python -c "import torch; print(torch.__version__); print(torch.cuda.is_available())"
-streamlit run app/app.py
-```
-
-For CPU-only systems, replace the PyTorch command with:
-
-```powershell
-pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cpu
-```
-
----
-
-# Optional: Run Video Processing Without Streamlit
-
-You can run the inference pipeline directly from terminal.
-
-Example:
-
-```powershell
-python -m inference.video_pipeline `
-  --ckpt "checkpoints/enhance_gan_conditional/latest.pth" `
-  --in_video "inputs/videos/test.mp4" `
-  --out_video "outputs/videos/output.mp4" `
+```bash
+python -m inference.video_pipeline \
+  --ckpt checkpoints/enhance_gan_conditional/latest.pth \
+  --in_video input.mp4 \
+  --out_video output.mp4 \
   --type protan
 ```
 
-Replace `protan` with `deutan` or `tritan` when needed.
+Supported types:
+
+* protan
+* deutan
+* tritan
 
 ---
 
-# Optional: Train the Model from Scratch
+# Challenges Addressed
 
-This section is for advanced users only.
+### No Real Training Dataset
 
-## 1. Resize raw images
-
-```powershell
-python -m preprocessing.resize_to_256 `
-  --src "dataset/coco_raw" `
-  --dst "dataset/original_256" `
-  --limit 15000
-```
-
-## 2. Generate enhancement targets
-
-```powershell
-python -m simulate.enhance_target `
-  --in_dir "dataset/original_256" `
-  --out_dir "dataset/enh_targets_256" `
-  --limit 15000
-```
-
-## 3. Train the conditional GAN
-
-```powershell
-python -m training.train_enhance_gan `
-  --x_dir "dataset/original_256" `
-  --y_dir "dataset/enh_targets_256" `
-  --out_dir "checkpoints/enhance_gan_conditional" `
-  --limit 15000 `
-  --epochs 40 `
-  --batch 6 `
-  --lr 0.0002 `
-  --lambda_l1 100 `
-  --lambda_id 10 `
-  --lambda_gan 1 `
-  --seed 123
-```
-
----
-
-# Troubleshooting
-
-## 1. `requirements.txt` not found
-Make sure you are inside the project root before running:
-
-```powershell
-pip install -r requirements.txt
-```
-
-## 2. PyTorch DLL error on Windows (`c10.dll`, `WinError 1114`)
-Common fix steps:
-
-1. Install Microsoft Visual C++ Redistributable x64
-2. Recreate the virtual environment
-3. Install PyTorch using the official command from the PyTorch website
-
-PyTorch’s official installation guidance and Microsoft’s runtime download page are the correct references for this issue. 
-
-## 3. Checkpoint not found
-Make sure the model file exists exactly here:
+No public dataset exists containing:
 
 ```text
-checkpoints/enhance_gan_conditional/best.pth
+Original Image
+→
+Color-Blind Optimized Image
 ```
 
-## 4. Streamlit runs but app cannot find files
-Check that:
-- `app/plates/` exists
-- `checkpoints/enhance_gan_conditional/best.pth` exists
-- `app.py` uses relative paths
+Solution:
 
-## 5. GPU not detected
-Run:
-
-```powershell
-python -c "import torch; print(torch.cuda.is_available())"
-```
-
-If it prints `False`, reinstall PyTorch using the correct GPU command from the official PyTorch install page. 
+Synthetic enhancement targets were generated using LAB color-space transformations.
 
 ---
 
-# Notes
+### Video Flickering
 
-- Dataset files are not included in this repository
-- Pretrained checkpoints are not stored in GitHub
-- Checkpoints must be downloaded separately from Kaggle
-- The project is intended to run locally
+Challenge:
+
+Frame-by-frame GAN inference can introduce flicker.
+
+Solution:
+
+Temporal smoothing was added.
+
+---
+
+### Soft Outputs
+
+Challenge:
+
+GAN outputs may appear slightly blurry.
+
+Solution:
+
+Sharpening controls were introduced.
+
+---
+
+### Browser Video Compatibility
+
+Challenge:
+
+Videos generated by OpenCV may not always play inside browsers.
+
+Solution:
+
+FFmpeg-based encoding support was added.
+
+---
+
+### Screening Test Memorization
+
+Challenge:
+
+Users could memorize fixed plate answers.
+
+Solution:
+
+Randomized plate generation with automatic configuration updates.
+
+---
+
+# Future Improvements
+
+* Real-time video enhancement
+* Mobile application deployment
+* User-specific adaptive enhancement
+* Clinical validation with CVD participants
+* Cloud deployment
 
 ---
 
 # Author
-Aditya Dnyandeo Ingale , 
-Final Year CSE Project ,
-Video Color Optimization for Color Blind People
+
+Aditya Dnyandeo Ingale
+
+Final Year Computer Science Engineering Project
+
+Video Color Optimization for Color Blind People using Conditional GAN
