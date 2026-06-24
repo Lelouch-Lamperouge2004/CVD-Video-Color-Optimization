@@ -4,8 +4,12 @@ from PIL import Image, ImageDraw, ImageFont
 import random
 import csv
 
-OUTPUT_DIR = r"D:\CVD_GAN\app\plates"
-os.makedirs(OUTPUT_DIR, exist_ok=True)
+from pathlib import Path
+
+ROOT_DIR = Path(__file__).resolve().parent.parent
+OUTPUT_DIR = ROOT_DIR / "app" / "plates"
+
+OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
 
 WIDTH = 512
 HEIGHT = 512
@@ -68,7 +72,7 @@ def generate_plate(number_text, axis_type, filename):
 
         draw.ellipse((x-r, y-r, x+r, y+r), fill=color)
 
-    img.save(os.path.join(OUTPUT_DIR, filename))
+    img.save(OUTPUT_DIR / filename)
 
 
 def main():
@@ -87,7 +91,7 @@ def main():
         generate_plate(num, "blue-yellow", filename)
         config_rows.append([filename, num, "by"])
 
-    config_path = os.path.join(OUTPUT_DIR, "plates_config.csv")
+    config_path = OUTPUT_DIR / "plates_config.csv"
 
     with open(config_path, "w", newline="", encoding="utf-8") as f:
         writer = csv.writer(f)

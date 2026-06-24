@@ -20,9 +20,9 @@ from inference.video_pipeline import process_video
 # -----------------------------
 # Paths (LOCAL)
 # -----------------------------
-CKPT_PATH = r"D:\CVD_GAN\checkpoints\enhance_gan_conditional\latest.pth"
-PLATE_DIR = Path(r"D:\CVD_GAN\app\plates")
-OUTPUT_DIR = Path(r"D:\CVD_GAN\outputs\videos")
+CKPT_PATH = ROOT_DIR / "checkpoints" / "enhance_gan_conditional" / "latest.pth"
+PLATE_DIR = ROOT_DIR / "app" / "plates"
+OUTPUT_DIR = ROOT_DIR / "outputs" / "videos"
 OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
 
 TYPE_LIST = ["protan", "deutan", "tritan"]
