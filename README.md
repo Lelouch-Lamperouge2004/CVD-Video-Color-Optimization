@@ -28,6 +28,14 @@ The system supports:
 
 ---
 
+## Key Achievements
+
+- Built a Conditional GAN based assistive vision system.
+- Implemented dynamic synthetic Ishihara-style screening.
+- Developed an end-to-end video enhancement pipeline.
+- Added temporal smoothing and sharpening controls.
+- Created an interactive Streamlit application for real-time demonstration.
+
 ## Project Highlights
 
 - Conditional GAN based video enhancement pipeline
@@ -48,12 +56,6 @@ The system supports:
 ---
 
 ## Application Screenshots
-
-### System Architecture & Workflow
-
-<p align="center">
-  <img src="demo/architecture_workflow.png" width="100%">
-</p>
 
 ### Screening Test
 
