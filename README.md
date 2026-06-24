@@ -1,6 +1,83 @@
 # Video Color Optimization for Color Blind People using Conditional GAN
 
-A deep learning-based video enhancement system that improves color distinguishability for people with Color Vision Deficiency (CVD) using a Conditional GAN (cGAN). The application provides a lightweight screening test, suggests an enhancement mode, processes uploaded videos frame-by-frame, and generates an optimized output video while preserving visual realism.
+<p align="center">
+  <img src="demo/banner.png" width="100%">
+</p>
+
+<p align="center">
+  <img src="https://img.shields.io/badge/Python-3.10-blue">
+  <img src="https://img.shields.io/badge/PyTorch-Conditional%20GAN-red">
+  <img src="https://img.shields.io/badge/OpenCV-Video%20Processing-green">
+  <img src="https://img.shields.io/badge/Streamlit-Web%20App-orange">
+  <img src="https://img.shields.io/badge/Model-Kaggle-purple">
+</p>
+
+---
+
+## Project Overview
+
+A deep learning-based video enhancement system that improves color distinguishability for people with **Color Vision Deficiency (CVD)** using a **Conditional Generative Adversarial Network (cGAN)**.
+
+The application provides a lightweight screening test, suggests an enhancement mode, processes uploaded videos frame-by-frame, and generates an optimized output video while preserving visual realism.
+
+The system supports:
+
+- Protan (Red deficiency)
+- Deutan (Green deficiency)
+- Tritan (Blue-Yellow deficiency)
+
+---
+
+## Project Highlights
+
+- Conditional GAN based video enhancement pipeline
+- U-Net Generator and PatchGAN Discriminator
+- Dynamic Ishihara-style screening test
+- Randomized screening plate generation
+- CSV-based answer synchronization
+- Frame-by-frame video enhancement
+- Temporal smoothing to reduce flickering
+- LAB color-space enhancement
+- Adjustable sharpening controls
+- Original vs Enhanced video comparison
+- Frame-level comparison
+- Browser-compatible MP4 playback
+- Downloadable enhanced video output
+- Streamlit-based interactive user interface
+
+---
+
+## Application Screenshots
+
+### System Architecture & Workflow
+
+<p align="center">
+  <img src="demo/architecture_workflow.png" width="100%">
+</p>
+
+### Screening Test
+
+<p align="center">
+  <img src="demo/screening_test.png" width="90%">
+</p>
+
+### Upload & Enhancement Controls
+
+<p align="center">
+  <img src="demo/upload_controls.png" width="90%">
+</p>
+
+### Original vs Enhanced Video
+
+<p align="center">
+  <img src="demo/video_comparison.png" width="90%">
+</p>
+
+### Frame-Level Comparison
+
+<p align="center">
+  <img src="demo/frame_comparison.png" width="90%">
+</p>
 
 ---
 
@@ -10,47 +87,46 @@ A deep learning-based video enhancement system that improves color distinguishab
 
 The system supports three major color vision deficiency types:
 
-* Protan (Red deficiency)
-* Deutan (Green deficiency)
-* Tritan (Blue-Yellow deficiency)
-
----
+- Protan
+- Deutan
+- Tritan
 
 ### Dynamic Screening Test
 
-* Synthetic Ishihara-style screening plates
-* Red-Green and Blue-Yellow axis evaluation
-* Automatic enhancement type suggestion
-* One-click generation of new randomized screening tests
-* CSV-based answer synchronization
-
----
+- Synthetic Ishihara-style screening plates
+- Red-Green and Blue-Yellow axis evaluation
+- Automatic enhancement type suggestion
+- One-click generation of new randomized screening tests
+- CSV-based answer synchronization
 
 ### Video Enhancement Pipeline
 
-* Upload MP4 videos
-* Frame-by-frame enhancement using Conditional GAN
-* Temporal smoothing to reduce flickering
-* LAB color-space enhancement
-* Adjustable enhancement strength
-* Adjustable sharpening controls
-
----
+- Upload MP4 videos
+- Frame-by-frame enhancement using Conditional GAN
+- Temporal smoothing to reduce flickering
+- LAB color-space enhancement
+- Adjustable enhancement strength
+- Adjustable sharpening controls
 
 ### Result Visualization
 
-* Side-by-side video comparison
-* Original vs Enhanced preview
-* Frame-level comparison
-
-  * Beginning frame
-  * Middle frame
-  * Ending frame
-* Download enhanced video
+- Side-by-side video comparison
+- Original vs Enhanced preview
+- Frame-level comparison
+  - Beginning frame
+  - Middle frame
+  - Ending frame
+- Download enhanced video
 
 ---
 
 ## System Architecture
+
+<p align="center">
+  <img src="demo/architecture_workflow.png" width="100%">
+</p>
+
+### Workflow Summary
 
 ```text
 Screening Test
@@ -84,8 +160,8 @@ The user answers synthetic Ishihara-style plates.
 
 The application analyzes mistakes on:
 
-* Red-Green plates
-* Blue-Yellow plates
+- Red-Green plates
+- Blue-Yellow plates
 
 and suggests an enhancement type.
 
@@ -93,8 +169,8 @@ and suggests an enhancement type.
 
 The user may:
 
-* Accept the suggested type
-* Manually select Protan, Deutan, or Tritan
+- Accept the suggested type
+- Manually select Protan, Deutan, or Tritan
 
 ### Step 4 – Video Upload
 
@@ -104,18 +180,18 @@ The user uploads an MP4 video.
 
 Each frame is:
 
-* Extracted
-* Resized
-* Conditioned with the selected CVD type
-* Passed through the trained Conditional GAN
+- Extracted
+- Resized
+- Conditioned with the selected CVD type
+- Passed through the trained Conditional GAN
 
 ### Step 6 – Enhancement
 
 Additional processing includes:
 
-* Temporal smoothing
-* LAB color enhancement
-* Edge sharpening
+- Temporal smoothing
+- LAB color enhancement
+- Edge sharpening
 
 ### Step 7 – Result Generation
 
@@ -125,8 +201,8 @@ Enhanced frames are reconstructed into a processed video.
 
 The application displays:
 
-* Original vs Enhanced Video
-* Representative Frame Comparisons
+- Original vs Enhanced Video
+- Representative Frame Comparisons
 
 ### Step 9 – Download
 
@@ -134,99 +210,93 @@ The enhanced video can be downloaded locally.
 
 ---
 
-# Technology Stack
+## Technology Stack
 
-## Frontend
-
-### Streamlit
+### Frontend: Streamlit
 
 Used for:
 
-* User Interface
-* Screening Test
-* Video Upload
-* Progress Tracking
-* Comparison Dashboard
-* Download Functionality
+- User Interface
+- Screening Test
+- Video Upload
+- Progress Tracking
+- Comparison Dashboard
+- Download Functionality
 
----
+**Why used:** Streamlit allows rapid development of machine learning applications using only Python, without requiring a separate frontend framework.
 
-## Backend
-
-### Python
+### Backend: Python 3.10
 
 Used for:
 
-* Application Logic
-* Video Processing
-* Inference Pipeline
-* File Management
+- Application Logic
+- Video Processing
+- Inference Pipeline
+- File Management
+- Screening Logic
 
----
+**Why used:** Python has strong support for deep learning, computer vision, image processing, and rapid prototyping.
 
-## Deep Learning
-
-### PyTorch
-
-Used for:
-
-* Conditional GAN
-* U-Net Generator
-* PatchGAN Discriminator
-* GPU Acceleration
-* Checkpoint Loading
-
----
-
-## Computer Vision
-
-### OpenCV
+### Deep Learning: PyTorch
 
 Used for:
 
-* Video Reading
-* Frame Extraction
-* Frame Resizing
-* Video Writing
+- Conditional GAN
+- U-Net Generator
+- PatchGAN Discriminator
+- GPU Acceleration
+- Checkpoint Loading
+- Model Inference
 
----
+**Why used:** PyTorch provides flexible neural network development, automatic differentiation, and CUDA-based GPU acceleration.
 
-## Image Processing
-
-### Pillow (PIL)
-
-Used for:
-
-* Synthetic Plate Generation
-* Image Rendering
-* Plate Visualization
-
----
-
-## Numerical Computing
-
-### NumPy
+### Computer Vision: OpenCV
 
 Used for:
 
-* Matrix Operations
-* Pixel Processing
-* Image Masks
+- Video Reading
+- Frame Extraction
+- Frame Resizing
+- Color Conversion
+- Video Writing
 
----
+**Why used:** OpenCV is reliable and efficient for frame-level video processing.
 
-## Video Encoding
-
-### imageio-ffmpeg
+### Image Processing: Pillow (PIL)
 
 Used for:
 
-* Browser-compatible MP4 generation
-* Streamlit video playback support
+- Synthetic Plate Generation
+- Image Rendering
+- Plate Visualization
+- Drawing Text and Shapes
+
+### Numerical Computing: NumPy
+
+Used for:
+
+- Matrix Operations
+- Pixel Processing
+- Image Masks
+- Array Manipulation
+
+### Video Encoding: imageio-ffmpeg
+
+Used for:
+
+- Browser-compatible MP4 generation
+- Streamlit video playback support
+- H.264 compatible video conversion
+
+### Version Control & Model Distribution
+
+**Git and GitHub** are used for source code management, version control, project documentation, and portfolio hosting.
+
+**Kaggle** is used for pretrained model checkpoint hosting and large model file distribution.
 
 ---
 
-# Project Structure
+## Project Structure
 
 ```text
 CVD-Video-Color-Optimization/
@@ -237,8 +307,18 @@ CVD-Video-Color-Optimization/
 │   └── plates/
 │
 ├── checkpoints/
+│   └── enhance_gan_conditional/
+│       └── latest.pth
 │
 ├── dataset/
+│
+├── demo/
+│   ├── banner.png
+│   ├── architecture_workflow.png
+│   ├── screening_test.png
+│   ├── upload_controls.png
+│   ├── video_comparison.png
+│   └── frame_comparison.png
 │
 ├── inference/
 │   └── video_pipeline.py
@@ -254,39 +334,239 @@ CVD-Video-Color-Optimization/
 ├── outputs/
 │
 ├── README.md
-│
-└── requirements.txt
+├── requirements.txt
+└── requirements-lock.txt
 ```
 
 ---
 
-# Folder Description
+## Folder Description
 
-## app/
+### app/
 
 Contains:
 
-* Streamlit application
-* Screening test logic
-* User interface
+- Streamlit application
+- Screening test logic
+- User interface
+- Synthetic plate generation
 
-### Important Files
+Important files:
 
-#### app.py
+- `app.py`: Main application entry point.
+- `generate_synthetic_plates.py`: Generates randomized screening plates and updates the plate configuration.
 
-Main application entry point.
-
-#### generate_synthetic_plates.py
-
-Generates randomized screening plates and updates plate configuration.
-
----
-
-## checkpoints/
+### checkpoints/
 
 Stores pretrained model checkpoints.
 
-Example:
+Expected model path:
+
+```text
+checkpoints/enhance_gan_conditional/latest.pth
+```
+
+Model checkpoints are not stored directly in GitHub because they are large. The checkpoint must be downloaded separately from Kaggle.
+
+### inference/
+
+Contains the runtime video enhancement pipeline.
+
+`video_pipeline.py` is responsible for:
+
+- Loading the trained model
+- Reading input video
+- Extracting frames
+- Running Conditional GAN inference
+- Applying post-processing
+- Writing enhanced output video
+
+### preprocessing/
+
+Contains dataset preprocessing utilities used for resizing raw images and preparing 256×256 training data.
+
+### simulate/
+
+Generates enhancement targets used during training, including color deficiency simulation and LAB color-space based enhancement target creation.
+
+### training/
+
+Contains the GAN architecture, training pipeline, loss functions, and training scripts.
+
+### utils/
+
+Contains shared helper functions and checkpoint utilities.
+
+### outputs/
+
+Stores generated enhanced videos locally.
+
+---
+
+## Model Architecture
+
+### Conditional GAN
+
+A Conditional GAN is used because the output enhancement depends on the selected deficiency type:
+
+- Protan
+- Deutan
+- Tritan
+
+The model receives both the video frame and the CVD type condition.
+
+### Generator: U-Net Generator
+
+Advantages:
+
+- Encoder-decoder architecture
+- Skip connections
+- Better detail preservation
+- Stable image reconstruction
+- Suitable for image-to-image translation
+
+**Why U-Net:** U-Net preserves important spatial details while allowing the model to transform image colors intelligently.
+
+### Discriminator: PatchGAN Discriminator
+
+Advantages:
+
+- Evaluates local image patches
+- Improves texture realism
+- Preserves local details
+- Helps generate sharper outputs
+
+**Why PatchGAN:** PatchGAN checks whether small image regions look realistic instead of judging only the full image.
+
+---
+
+## Training Configuration
+
+| Parameter | Value |
+|---|---|
+| Dataset Size | 15,000 Images |
+| Resolution | 256×256 |
+| Epochs | 40 |
+| Batch Size | 6 |
+| Learning Rate | 0.0002 |
+| Optimizer | Adam |
+| Generator | U-Net |
+| Discriminator | PatchGAN |
+| Framework | PyTorch |
+| Supported Types | Protan, Deutan, Tritan |
+
+---
+
+## Performance Summary
+
+| Component | Implementation |
+|---|---|
+| Deep Learning Framework | PyTorch |
+| GAN Architecture | Conditional GAN |
+| Generator | U-Net |
+| Discriminator | PatchGAN |
+| Optimizer | Adam |
+| Video Processing | OpenCV |
+| Video Encoding | ImageIO-FFMPEG |
+| Interface | Streamlit |
+| Screening Test | Dynamic Synthetic Plates |
+| Output | Enhanced MP4 Video |
+
+---
+
+## Key Technical Contributions
+
+### Dynamic Screening Module
+
+Implemented synthetic Ishihara-style plate generation with randomized answers to reduce memorization and improve flexibility.
+
+### Conditional GAN Enhancement Pipeline
+
+Designed a video enhancement pipeline using a trained Conditional GAN to improve color distinguishability for users with CVD.
+
+### Temporal Video Stabilization
+
+Implemented temporal smoothing to reduce frame-to-frame flickering during inference.
+
+### Browser-Compatible Video Reconstruction
+
+Integrated ImageIO-FFMPEG to ensure generated videos can be played directly inside Streamlit and modern browsers.
+
+### Interactive Comparison Dashboard
+
+Developed comparison modules including:
+
+- Original vs Enhanced Video
+- Beginning Frame Comparison
+- Middle Frame Comparison
+- Ending Frame Comparison
+
+---
+
+## Installation
+
+### Clone Repository
+
+```bash
+git clone https://github.com/Lelouch-Lamperouge2004/CVD-Video-Color-Optimization.git
+cd CVD-Video-Color-Optimization
+```
+
+### Create Virtual Environment
+
+```bash
+python -m venv .venv
+```
+
+Activate on Windows:
+
+```bash
+.\.venv\Scripts\activate
+```
+
+### Install Dependencies
+
+```bash
+pip install -r requirements.txt
+```
+
+### Install PyTorch
+
+CUDA version:
+
+```bash
+pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu121
+```
+
+CPU version:
+
+```bash
+pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cpu
+```
+
+### Install FFmpeg Wrapper
+
+```bash
+pip install imageio-ffmpeg
+```
+
+---
+
+## Download Pretrained Model
+
+Download the checkpoint from Kaggle:
+
+```text
+https://www.kaggle.com/datasets/lelouchlamperouge69/cvd-pretrained-cgan-model-for-vc-optimization
+```
+
+Place the file at:
+
+```text
+checkpoints/enhance_gan_conditional/latest.pth
+```
+
+Final expected structure:
 
 ```text
 checkpoints/
@@ -296,163 +576,7 @@ checkpoints/
 
 ---
 
-## inference/
-
-Contains the runtime video enhancement pipeline.
-
-### video_pipeline.py
-
-Responsible for:
-
-* Loading the trained model
-* Reading videos
-* Processing frames
-* Writing enhanced output
-
----
-
-## preprocessing/
-
-Dataset preprocessing utilities.
-
----
-
-## simulate/
-
-Generates enhancement targets used during training.
-
----
-
-## training/
-
-Contains:
-
-* GAN architecture
-* Training pipeline
-* Loss functions
-
----
-
-## utils/
-
-Shared helper functions and checkpoint utilities.
-
----
-
-# Model Architecture
-
-## Generator
-
-U-Net Generator
-
-Advantages:
-
-* Skip Connections
-* Better Detail Preservation
-* Stable Image Reconstruction
-
----
-
-## Discriminator
-
-PatchGAN Discriminator
-
-Advantages:
-
-* Better Texture Learning
-* Improved Local Feature Detection
-* Stable GAN Training
-
----
-
-# Training Configuration
-
-| Parameter     | Value         |
-| ------------- | ------------- |
-| Dataset Size  | 15,000 Images |
-| Resolution    | 256×256       |
-| Epochs        | 40            |
-| Batch Size    | 6             |
-| Learning Rate | 0.0002        |
-| Optimizer     | Adam          |
-| Generator     | U-Net         |
-| Discriminator | PatchGAN      |
-
----
-
-# Installation
-
-## Clone Repository
-
-```bash
-git clone https://github.com/Lelouch-Lamperouge2004/CVD-Video-Color-Optimization.git
-
-cd CVD-Video-Color-Optimization
-```
-
----
-
-## Create Virtual Environment
-
-```bash
-python -m venv .venv
-```
-
-Activate:
-
-```bash
-.\.venv\Scripts\activate
-```
-
----
-
-## Install Dependencies
-
-```bash
-pip install -r requirements.txt
-```
-
----
-
-## Install PyTorch
-
-### CUDA Version
-
-```bash
-pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu121
-```
-
-### CPU Version
-
-```bash
-pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cpu
-```
-
----
-
-## Install FFmpeg Wrapper
-
-```bash
-pip install imageio-ffmpeg
-```
-
----
-
-# Download Pretrained Model
-
-Download the checkpoint from:
-
-https://www.kaggle.com/datasets/lelouchlamperouge69/cvd-pretrained-cgan-model-for-vc-optimization
-
-Place the file at:
-
-```text
-checkpoints/enhance_gan_conditional/latest.pth
-```
-
----
-
-# Running the Application
+## Running the Application
 
 Generate screening plates:
 
@@ -466,7 +590,7 @@ Run Streamlit:
 streamlit run app/app.py
 ```
 
-Open:
+Open in browser:
 
 ```text
 http://localhost:8501
@@ -474,7 +598,7 @@ http://localhost:8501
 
 ---
 
-# Running Direct Inference
+## Running Direct Inference
 
 ```bash
 python -m inference.video_pipeline \
@@ -486,92 +610,118 @@ python -m inference.video_pipeline \
 
 Supported types:
 
-* protan
-* deutan
-* tritan
+- protan
+- deutan
+- tritan
 
 ---
 
-# Challenges Addressed
+## Optional Training Pipeline
 
-### No Real Training Dataset
+### Step 1 – Resize Dataset
 
-No public dataset exists containing:
-
-```text
-Original Image
-→
-Color-Blind Optimized Image
+```bash
+python -m preprocessing.resize_to_256 \
+  --src dataset/coco_raw \
+  --dst dataset/original_256 \
+  --limit 15000
 ```
 
-Solution:
+### Step 2 – Generate Enhancement Targets
 
-Synthetic enhancement targets were generated using LAB color-space transformations.
+```bash
+python -m simulate.enhance_target \
+  --in_dir dataset/original_256 \
+  --out_dir dataset/enh_targets_256 \
+  --limit 15000
+```
 
----
+### Step 3 – Train Conditional GAN
 
-### Video Flickering
-
-Challenge:
-
-Frame-by-frame GAN inference can introduce flicker.
-
-Solution:
-
-Temporal smoothing was added.
-
----
-
-### Soft Outputs
-
-Challenge:
-
-GAN outputs may appear slightly blurry.
-
-Solution:
-
-Sharpening controls were introduced.
+```bash
+python -m training.train_enhance_gan \
+  --x_dir dataset/original_256 \
+  --y_dir dataset/enh_targets_256 \
+  --out_dir checkpoints/enhance_gan_conditional \
+  --limit 15000 \
+  --epochs 40 \
+  --batch 6 \
+  --lr 0.0002 \
+  --lambda_l1 100 \
+  --lambda_id 10 \
+  --lambda_gan 1 \
+  --seed 123
+```
 
 ---
 
-### Browser Video Compatibility
+## Challenges Addressed
 
-Challenge:
-
-Videos generated by OpenCV may not always play inside browsers.
-
-Solution:
-
-FFmpeg-based encoding support was added.
-
----
-
-### Screening Test Memorization
-
-Challenge:
-
-Users could memorize fixed plate answers.
-
-Solution:
-
-Randomized plate generation with automatic configuration updates.
+| Challenge | Solution |
+|---|---|
+| No real paired training dataset | Synthetic enhancement targets using LAB color space |
+| Video flickering | Temporal smoothing |
+| Soft GAN outputs | Sharpening controls |
+| Browser video compatibility | ImageIO-FFMPEG encoding |
+| Fixed screening answers | Randomized plate generation |
+| Large checkpoint size | Kaggle checkpoint hosting |
 
 ---
 
-# Future Improvements
+## Evaluation Metrics
 
-* Real-time video enhancement
-* Mobile application deployment
-* User-specific adaptive enhancement
-* Clinical validation with CVD participants
-* Cloud deployment
+The project uses visual and quantitative evaluation.
+
+### Mean Absolute Difference
+
+Measures how much the output image changes compared to the input.
+
+### Saturation Gain
+
+Measures whether color intensity and distinguishability improved.
+
+### Edge Gain
+
+Measures whether object boundaries and visual details are preserved.
+
+These metrics help evaluate whether the model improves color visibility while maintaining image realism.
 
 ---
 
-# Author
+## Future Improvements
 
-Aditya Dnyandeo Ingale
+- Real-time webcam enhancement
+- Mobile application deployment
+- User-specific adaptive enhancement
+- Clinical validation with CVD participants
+- Cloud deployment
+- Larger and more diverse training datasets
+- AR/VR integration for assistive vision
+
+---
+
+## Skills Demonstrated
+
+- Deep Learning
+- Generative AI
+- Conditional GANs
+- Computer Vision
+- Video Processing
+- Streamlit Development
+- PyTorch
+- OpenCV
+- Dataset Engineering
+- Model Inference
+- GPU Acceleration
+- Software Engineering
+- Git and GitHub
+
+---
+
+## Author
+
+**Aditya Dnyandeo Ingale**
 
 Final Year Computer Science Engineering Project
 
-Video Color Optimization for Color Blind People using Conditional GAN
+**Video Color Optimization for Color Blind People using Conditional GAN**
